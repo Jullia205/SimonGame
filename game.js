@@ -1,0 +1,48 @@
+//DEFININDO O COMPORTAMENTO DE CADA BOTÃO
+
+const verde = new Audio('./sounds/green.mp3');
+const vermelho = new Audio('./sounds/red.mp3');
+const amarelo = new Audio('./sounds/yellow.mp3');
+const azul = new Audio('./sounds/blue.mp3');
+const erro = new Audio('./sounds/wrong.mp3')
+
+function Button (b_id, b_sound){
+    this.b_id = b_id;
+    this.b_sound = b_sound;
+}
+
+let green = new Button($("#green"),verde);
+let red = new Button($("#red"),vermelho);
+let yellow = new Button($("#yellow"),amarelo);
+let blue = new Button($("#blue"),azul);
+const botoes = [green,red,yellow,blue];
+
+function playSound(botoes){
+    for(let botao=0; botao<botoes.length;botao++){
+        botoes[botao].b_id.on("click", function(){
+            botoes[botao].b_sound.play();
+        })
+    }
+}
+function animate(botoes){
+    for(let botao=0; botao<botoes.length;botao++){
+        botoes[botao].b_id.on("click", function(){
+            botoes[botao].b_id.addClass("pressed");
+        setTimeout(function(){
+        botoes[botao].b_id.removeClass("pressed");
+        },200);
+        })
+    }
+
+}
+playSound(botoes);
+animate(botoes);
+let sequencia = [];
+//Colocaremos todo um codigo em um loop while que será ativado dps de clicar A
+//Aqui vamos definir uma sequencia aleatória de botões
+let number = 0;
+for(let i=0; i<botoes.length;i++){
+    number = Math.floor(Math.random()*botoes.length);
+    
+}
+
