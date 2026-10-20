@@ -35,14 +35,19 @@ function animate(botoes){
     }
 
 }
+function newSequence(botoes){
+    let sequencia = [];
+    let number = 0;
+    for(let i=0; i<botoes.length;i++){
+        number = Math.floor(Math.random()*botoes.length);
+        sequencia.push(botoes[number]);
+    }
+}
 playSound(botoes);
 animate(botoes);
-let sequencia = [];
 //Colocaremos todo um codigo em um loop while que será ativado dps de clicar A
+
 //Aqui vamos definir uma sequencia aleatória de botões
-let number = 0;
-for(let i=0; i<botoes.length;i++){
-    number = Math.floor(Math.random()*botoes.length);
-    
-}
+
+
 
