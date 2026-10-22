@@ -17,34 +17,26 @@ let yellow = new Button($("#yellow"),amarelo);
 let blue = new Button($("#blue"),azul);
 const botoes = [green,red,yellow,blue];
 
-function playSound(botoes){
-    for(let botao=0; botao<botoes.length;botao++){
-        botoes[botao].b_id.on("click", function(){
-            botoes[botao].b_sound.play();
-        })
-    }
+function playSound(botao){
+    botao.b_sound.play();
 }
-function animate(botoes){
-    for(let botao=0; botao<botoes.length;botao++){
-        botoes[botao].b_id.on("click", function(){
-            botoes[botao].b_id.addClass("pressed");
-        setTimeout(function(){
-        botoes[botao].b_id.removeClass("pressed");
-        },200);
-        })
-    }
-
+function animate(botao){
+    botao.b_id.addClass("pressed");
+    setTimeout(function(){
+        botao.b_id.removeClass("pressed");
+    },200);
 }
 function newSequence(botoes){
     let sequencia = [];
+    let randomLength = Math.floor(Math.random()*botoes.length)
     let number = 0;
-    for(let i=0; i<botoes.length;i++){
+    for(let i=0; i<randomLength;i++){
         number = Math.floor(Math.random()*botoes.length);
         sequencia.push(botoes[number]);
     }
+    return sequencia;
 }
-playSound(botoes);
-animate(botoes);
+
 //Colocaremos todo um codigo em um loop while que será ativado dps de clicar A
 
 //Aqui vamos definir uma sequencia aleatória de botões
