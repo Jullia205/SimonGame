@@ -29,40 +29,26 @@ function animate(botao){
         botao.b_id.removeClass("pressed");
     },200);
 }
-function newSequence(botoes,sequencia){
-    let randomLength = Math.floor(Math.random()*botoes.length)
-    let number = 0;
-    for(let i=0; i<randomLength;i++){
-        number = Math.floor(Math.random()*botoes.length);
-        sequencia.push(botoes[number]);
-    }
-    return sequencia;
-}
-function animateSequence(botoes){
-    let timer = 300;
-    let sequence = newSequence(botoes,sequencia);
-    for(let i=0; i<sequence.length;i++){
-        setTimeout(function(){
-            playSound(sequence[i]);
-            animate(sequence[i]);
-        },timer)
-        timer=timer+300;
-    }
-}
-function userInput(botoes,userSequencia){
-    for(let botao=0; botao<botoes.length;botao++){
-    botoes[botao].b_id.on("click", function(){
-        playSound(botoes[botao]);
-        animate(botoes[botao]);
-        userSequencia.push(botoes[botao])
-    })
+function nextSequence(botoes,sequencia){
+    let randomColor = Math.floor(Math.random()*botoes.length)
+    sequencia.push(botoes[randomColor]);
+    animate(sequencia[randomColor]);
+    playSound(sequencia[randomColor]);
 }
 
+function userInput(botoes,userSequencia){
+    for(let botao=0; botao<botoes.length;botao++){
+        botoes[botao].b_id.on("click", function(){
+            playSound(botoes[botao]);
+            animate(botoes[botao]);
+            userSequencia.push(botoes[botao])
+        })
+    }
 }
 
 $(document).on("keydown", function(event){
     if(event.key=="a"){
-        animateSequence(botoes);
+        nextSequence(botoes,sequencia);
     }
     userInput(botoes,userSequencia);
 })
