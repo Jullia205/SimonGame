@@ -37,10 +37,14 @@ function newSequence(botoes){
     return sequencia;
 }
 function animateSequence(botoes){
+    let timer = 300;
     let sequence = newSequence(botoes);
     for(let i=0; i<sequence.length;i++){
-        playSound(sequence[i]);
-        animate(sequence[i]);
+        setTimeout(function(){
+            playSound(sequence[i]);
+            animate(sequence[i]);
+        },timer)
+        timer=timer+300;
     }
 }
 for(let botao=0; botao<botoes.length;botao++){
@@ -54,9 +58,6 @@ $(document).on("keydown", function(event){
         animateSequence(botoes);
     }
 })
-//Colocaremos todo um codigo em um loop while que será ativado dps de clicar A
-
-//Aqui vamos definir uma sequencia aleatória de botões
 
 
 
