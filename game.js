@@ -18,7 +18,7 @@ let blue = new Button($("#blue"),azul);
 const botoes = [green,red,yellow,blue];
 let userSequencia = [];
 let sequencia = [];
-
+let level = 0;
 
 function playSound(botao){
     botao.b_sound.play();
@@ -32,8 +32,8 @@ function animate(botao){
 function nextSequence(botoes,sequencia){
     let randomColor = Math.floor(Math.random()*botoes.length)
     sequencia.push(botoes[randomColor]);
-    animate(sequencia[randomColor]);
-    playSound(sequencia[randomColor]);
+    animate(botoes[randomColor]);
+    playSound(botoes[randomColor]);
 }
 
 function userInput(botoes,userSequencia){
@@ -49,8 +49,17 @@ function userInput(botoes,userSequencia){
 $(document).on("keydown", function(event){
     if(event.key=="a"){
         nextSequence(botoes,sequencia);
+        $("#level-title").text("Level"+" "+level);
+        userInput(botoes,userSequencia);
+        console.log("okeis")
+        for(let i=0;i<sequencia.length;i++){
+            if(userSequencia[i]==sequencia[i]){
+                $("#level-title").text("Level"+" "+(level+1));
+            }
+        }
+
     }
-    userInput(botoes,userSequencia);
+
 })
 
 
