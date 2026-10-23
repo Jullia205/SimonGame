@@ -16,6 +16,9 @@ let red = new Button($("#red"),vermelho);
 let yellow = new Button($("#yellow"),amarelo);
 let blue = new Button($("#blue"),azul);
 const botoes = [green,red,yellow,blue];
+let userSequencia = [];
+let sequencia = [];
+
 
 function playSound(botao){
     botao.b_sound.play();
@@ -26,8 +29,7 @@ function animate(botao){
         botao.b_id.removeClass("pressed");
     },200);
 }
-function newSequence(botoes){
-    let sequencia = [];
+function newSequence(botoes,sequencia){
     let randomLength = Math.floor(Math.random()*botoes.length)
     let number = 0;
     for(let i=0; i<randomLength;i++){
@@ -38,7 +40,7 @@ function newSequence(botoes){
 }
 function animateSequence(botoes){
     let timer = 300;
-    let sequence = newSequence(botoes);
+    let sequence = newSequence(botoes,sequencia);
     for(let i=0; i<sequence.length;i++){
         setTimeout(function(){
             playSound(sequence[i]);
@@ -47,16 +49,22 @@ function animateSequence(botoes){
         timer=timer+300;
     }
 }
-for(let botao=0; botao<botoes.length;botao++){
+function userInput(botoes,userSequencia){
+    for(let botao=0; botao<botoes.length;botao++){
     botoes[botao].b_id.on("click", function(){
         playSound(botoes[botao]);
         animate(botoes[botao]);
+        userSequencia.push(botoes[botao])
     })
 }
+
+}
+
 $(document).on("keydown", function(event){
     if(event.key=="a"){
         animateSequence(botoes);
     }
+    userInput(botoes,userSequencia);
 })
 
 
