@@ -32,11 +32,20 @@ function animate(botao){
 function nextSequence(botoes,sequencia){
     let randomColor = Math.floor(Math.random()*botoes.length)
     sequencia.push(botoes[randomColor]);
-    animate(botoes[randomColor]);
-    playSound(botoes[randomColor]);
 }
 
-function userInput(botoes,userSequencia){
+function gamePlay(level){
+    nextSequence(botoes,sequencia);
+    animate(sequencia[level]);
+    playSound(sequencia[level]);
+    setTimeout(function(){
+        userInput(userSequencia);
+    },300)
+    return true;
+
+}
+
+function userInput(userSequencia){
     for(let botao=0; botao<botoes.length;botao++){
         botoes[botao].b_id.on("click", function(){
             playSound(botoes[botao]);
@@ -48,19 +57,12 @@ function userInput(botoes,userSequencia){
 
 $(document).on("keydown", function(event){
     if(event.key=="a"){
-        nextSequence(botoes,sequencia);
         $("#level-title").text("Level"+" "+level);
-        userInput(botoes,userSequencia);
-        console.log("okeis")
-        for(let i=0;i<sequencia.length;i++){
-            if(userSequencia[i]==sequencia[i]){
-                $("#level-title").text("Level"+" "+(level+1));
-            }
-        }
-
+        setTimeout(function(){
+            gamePlay(level);
+        },700)
     }
 
 })
-
 
 
